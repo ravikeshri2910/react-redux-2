@@ -1,51 +1,40 @@
+// import { createSlice, configureStore } from '@reduxjs/toolkit';
+import { createSlice , configureStore } from '@reduxjs/toolkit'
 
-import {legacy_createStore as createStore} from 'redux'
 
-const contextReducer = (state = {counter : 0}, action) =>{
-    if(action.type === 'increament'){
-        return{
-            counter : state.counter + 1
-        }
-    }
-    if(action.type === 'decreament'){
-        return{
-            counter : state.counter - 1
-        }
-    }
-    if(action.type === 'increament5'){
-        return{
-            counter : state.counter + 5
-        }
-    }
-    if(action.type === 'decreament5'){
-        return{
-            counter : state.counter - 5
-        }
-    }
-
-    return state
+const initialValue = {
+    counter :0,
+    showCounter :true
 }
 
-const store = createStore(contextReducer)
 
-export default store
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState : initialValue,
+    reducers: {
+        increment(state) {
+            state.counter++;
+        },
+        decrement(state) {
+            state.counter--;
+        },
+        incrementBy5(state, action) {
+            state.counter = state.counter + action.payload;
+        },
+        decrementBy5(state, action) {
+            state.counter -= action.payload;
+        },
+        toggleEvent(state) {
+            state.showCounter = !state.showCounter;
+        }
+    }
+});
+
+const store = configureStore({
+    reducer: counterSlice.reducer
+});
+
+export const counterActions = counterSlice.actions;
+export default store;
 
 
-// const contextReducer = (state = { counter: 0 }, action) => {
-//   if (action.type === 'increment') {
-//     return {
-//       counter: state.counter + 1
-//     };
-//   }
-//   if (action.type === 'decrement') {
-//     return {
-//       counter: state.counter - 1
-//     };
-//   }
-
-//   return state;
-// };
-
-// const store = createStore(contextReducer);
-
-// export default store;
