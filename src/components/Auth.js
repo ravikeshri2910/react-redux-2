@@ -1,6 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux';
 import classes from './Auth.module.css';
+import {counterAuth} from '../store/context'
 
 const Auth = () => {
+  const dispatch =  useDispatch()
+  const auth = useSelector(state => state.auth.isAuthenticatin)
+
+  const logInHandler = () =>{
+    dispatch(counterAuth.logIn())
+  }
+
   return (
     <main className={classes.auth}>
       <section>
@@ -13,7 +22,7 @@ const Auth = () => {
             <label htmlFor='password'>Password</label>
             <input type='password' id='password' />
           </div>
-          <button>Login</button>
+          <button onClick={logInHandler}>Login</button>
         </form>
       </section>
     </main>

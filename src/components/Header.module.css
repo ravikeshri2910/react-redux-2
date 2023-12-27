@@ -29,6 +29,7 @@
 
 .header a:hover,
 .header a:active {
+  /* color: black; */
   color: #b864da;
 }
 
